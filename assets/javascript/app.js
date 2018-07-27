@@ -2,7 +2,6 @@
 
 var question = $('#question');
 var answers = $('#answers');
-var questionCounter = 0;
 
 var questionArr = [
   {
@@ -86,35 +85,49 @@ var questionArr = [
 ];
 
 var funcs = {
+  right: 0,
+  wrong: 0,
   questionCounter: 0,
-  seconds: 25,
+  seconds: 30,
   intervalPID: 0,
   startScreen: function() {
-    
+    var newBtn = $('<h1>');
+    newBtn.addClass('startBtn');
+    newBtn.text('Press Here to Start!');
+    newBtn.click(function () {
+      funcs.quizGen();
+      funcs.startTimer();
+    });
+    question.append(newBtn);
   },
   quizGen: function() {
 
-    var questionObj = questionArr[questionCounter];
+    var questionObj = questionArr[funcs.questionCounter];
     question.text(questionObj.question);
     
     $.each(questionObj, function(key, val) {
       if (key !== 'question') {
+        var answ = $('<div>');
+        answ.text(val);
+        answ.addClass('answer');
+
+        answ.click(function () {
+          if ($(this).attr('data-correct') === 'true') {
+            funcs.answerCorrect();
+          } else {
+            funcs.answerWrong();
+          }
+        });
+
         if (key === 'correct') {
-          var goodAnsw = $('<div>');
-          goodAnsw.text(val);
-          goodAnsw.addClass('answer');
-          goodAnsw.attr('data-correct', 'true');
-          answers.append(goodAnsw);
+          answ.attr('data-correct', 'true');
+          answers.append(answ);
         } else {
-          var badAnsw = $('<div>');
-          badAnsw.text(val);
-          badAnsw.addClass('answer');
-          badAnsw.attr('data-correct', 'false');
-          answers.append(badAnsw);
+          answ.attr('data-correct', 'false');
+          answers.append(answ);
         }
       }
     });
-
     $('#timer').text(`Time Remaining: ${this.seconds}`);
     
   },
@@ -126,10 +139,57 @@ var funcs = {
   },
   stopTimer: function() {
     clearInterval(this.intervalPID);
+  },
+  answerCorrect: function() {
+    this.stopTimer();
+    this.seconds = 30;
+    answers.empty();
+    question.text('Good job! Get ready for the next question.');
+    this.questionCounter += 1;
+    this.right += 1;
+    if (this.questionCounter === 10) {
+      funcs.endScreen();
+    } else {
+      setTimeout(() => {
+        funcs.quizGen();
+        funcs.startTimer();
+      }, 3000);
+    }
+  },
+  answerWrong: function() {
+    var rightAnsw = questionArr[this.questionCounter].correct;
+    question.text(`Sorry! The correct answer is ${rightAnsw}`);
+    this.stopTimer();
+    answers.empty();
+    this.seconds = 30;
+    this.wrong += 1;
+    this.questionCounter += 1;
+    if (this.questionCounter === 10) {
+      funcs.endScreen();
+    } else {
+      setTimeout(() => {
+        funcs.quizGen();
+        funcs.startTimer();
+      }, 3000);
+    }
+  },
+  endScreen: function() {
+    answers.empty();
+    question.empty();
+    this.stopTimer();
+
+    var banner = $('<h1>');
+    banner.text(`Finished! You got ${this.right} correct and missed ${this.wrong}`);
+    question.append(banner);
+    
+    var restartBtn = $('<h3>');
+    restartBtn.text('Press here to restart!');
+    restartBtn.click(function() {
+      location.reload();
+    });
+    answers.append(restartBtn);
   }
 }
 
-funcs.quizGen();
-funcs.startTimer();
-
+funcs.startScreen();
 

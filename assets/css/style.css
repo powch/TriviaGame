@@ -36,6 +36,10 @@ body {
     color: magenta;
 }
 
+.startBtn {
+    font-size: 2rem;
+}
+
 #title {
     font-size: 3rem;
 }
