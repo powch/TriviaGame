@@ -1,5 +1,5 @@
 html {
-    font-size: 16px;
+    font-size: 36px;
 }
 
 body {
@@ -16,13 +16,38 @@ body {
     width: 960px;
     margin: auto;
     margin-top: 3%;
+    border-radius: 40px;
 }
 
 .center {
     margin: auto;
-    padding: 5%;
+    padding: 3%;
+}
+
+.answer {
+    padding: 10px;
+    border-width: 0px 2px 2px 2px;
+    border-style: solid;
+    border-color: rgb(33, 253, 33);
+    transition: .3s color;
+}
+
+.answer:hover {
+    color: magenta;
+}
+
+.startBtn {
+    font-size: 2rem;
 }
 
 #title {
     font-size: 3rem;
+}
+
+#timer {
+    font-size: 2rem;
+}
+
+#answers h3 {
+    font-size: 2rem;
 }
