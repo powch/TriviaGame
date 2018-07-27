@@ -36,18 +36,10 @@ body {
     color: magenta;
 }
 
-.startBtn {
+.startBtn, #timer, #answers h3 {
     font-size: 2rem;
 }
 
 #title {
     font-size: 3rem;
-}
-
-#timer {
-    font-size: 2rem;
-}
-
-#answers h3 {
-    font-size: 2rem;
 }
