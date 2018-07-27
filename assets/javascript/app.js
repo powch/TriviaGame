@@ -156,7 +156,7 @@ var funcs = {
         if (this.questionCounter === 10) {
             funcs.endScreen();
         } else {
-            setTimeout(() => {
+            setTimeout(function() {
                 funcs.quizGen();
                 funcs.startTimer();
             }, 3000);
@@ -174,7 +174,7 @@ var funcs = {
         if (this.questionCounter === 10) {
             funcs.endScreen();
         } else {
-            setTimeout(() => {
+            setTimeout(function() {
                 funcs.quizGen();
                 funcs.startTimer();
             }, 3000);
@@ -192,7 +192,7 @@ var funcs = {
         if (this.questionCounter === 10) {
             funcs.endScreen();
         } else {
-            setTimeout(() => {
+            setTimeout(function() {
                 funcs.quizGen();
                 funcs.startTimer();
             }, 4850);
