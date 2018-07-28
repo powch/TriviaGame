@@ -181,7 +181,7 @@ var funcs = {
             setTimeout(function() {
                 funcs.quizGen();
                 funcs.startTimer();
-            }, 3000);
+            }, 2850);
         }
     },
     timeOut: function () {
@@ -223,6 +223,7 @@ var funcs = {
     },
     gifGen: function(cond) {
         var newImg = $('<img>');
+        newImg.addClass('gif');
         switch (cond) {
             case 'right':
                 newImg.attr('src', 'assets/images/win.gif');
@@ -234,6 +235,7 @@ var funcs = {
                 newImg.attr('src', 'assets/images/time-up.gif');
                 break;
             default:
+                newImg.removeClass('gif');
                 newImg.attr('src', 'assets/images/game-over.gif');
         }
         answers.append(newImg);

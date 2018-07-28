@@ -40,6 +40,11 @@ body {
     font-size: 2rem;
 }
 
+.gif {
+    height: 300px;
+    width: 300px;
+}
+
 #title {
     font-size: 3rem;
 }
