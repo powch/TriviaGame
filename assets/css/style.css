@@ -43,3 +43,13 @@ body {
 #title {
     font-size: 3rem;
 }
+
+#hearts {
+    padding: 0px;
+}
+
+#hearts img {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+}

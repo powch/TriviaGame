@@ -90,6 +90,7 @@ var funcs = {
     questionCounter: 0,
     seconds: 30,
     intervalPID: 0,
+    heartCounter: 10,
     startScreen: function () {
         var newBtn = $('<h1>');
         newBtn.addClass('startBtn');
@@ -97,6 +98,7 @@ var funcs = {
         newBtn.click(function () {
             funcs.quizGen();
             funcs.startTimer();
+            funcs.heartBar();
         });
         question.append(newBtn);
     },
@@ -171,6 +173,8 @@ var funcs = {
         this.seconds = 30;
         this.wrong += 1;
         this.questionCounter += 1;
+        this.heartCounter -= 1;
+        this.heartBar();
         if (this.questionCounter === 10) {
             funcs.endScreen();
         } else {
@@ -189,6 +193,8 @@ var funcs = {
         this.seconds = 30;
         this.wrong += 1;
         this.questionCounter += 1;
+        this.heartCounter -= 1;
+        this.heartBar();
         if (this.questionCounter === 10) {
             funcs.endScreen();
         } else {
@@ -231,6 +237,14 @@ var funcs = {
                 newImg.attr('src', 'assets/images/game-over.gif');
         }
         answers.append(newImg);
+    },
+    heartBar: function() {
+        $('#hearts').empty();
+        for (var i = 0; i < funcs.heartCounter; i++) {
+            var newImg = $('<img>');
+            newImg.attr('src', 'assets/images/heart.png');
+            $('#hearts').append(newImg);
+        }
     }
 }
 
